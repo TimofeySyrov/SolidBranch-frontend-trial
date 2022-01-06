@@ -1,1 +1,26 @@
-<p>navigator works!</p>
+<div class="navigator-page">
+  <div class="navigator-table">
+    <ul class="navigator-table__tabs">
+      <li *ngFor="let tab of tabsList" class="navigator-table__tab" [ngClass]="{'navigator-table__tab_active': activeTabId===tab.id}">
+        <a [routerLink]="['/navigator']" [queryParams]="{ tab: tab.id }" class="navigator-table__link">{{tab.name}}</a>
+      </li>
+    </ul>
+    <div class="navigator-table__table-box">
+      <table *ngIf="usersByType; else usersNotFound" class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Acount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usersByType">
+            <td>{{user.name.first}} {{user.name.last}}</td>
+            <td>{{user.amount}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <ng-template #usersNotFound>Users not found :c</ng-template>
+    </div>
+  </div>
+</div>
